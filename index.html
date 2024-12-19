@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>My Docs</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">My Docs</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#practica-de-ampliacion-ud2" class="nav-link">PRÁCTICA DE AMPLIACIÓN UD2</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#configuracion-de-un-servidor-nginx-con-hosts-virtuales-y-directorios-de-usuario" class="nav-link">Configuración de un Servidor Nginx con Hosts Virtuales y Directorios de Usuario</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#instalacion-de-nginx" class="nav-link">Instalación de Nginx</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#creacion-de-usuarios-del-sistema" class="nav-link">Creación de Usuarios del Sistema</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#estructura-de-carpetas-y-archivos" class="nav-link">Estructura de Carpetas y Archivos</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#creacion-de-hosts-virtuales" class="nav-link">Creación de Hosts Virtuales</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#configuracion-del-archivo-host" class="nav-link">Configuración del Archivo Host</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementar-https" class="nav-link">Implementar HTTPS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="practica-de-ampliacion-ud2">PRÁCTICA DE AMPLIACIÓN UD2</h1>
+<h1 id="configuracion-de-un-servidor-nginx-con-hosts-virtuales-y-directorios-de-usuario">Configuración de un Servidor Nginx con Hosts Virtuales y Directorios de Usuario</h1>
+<p>El objetivo de esta práctica es configurar un servidor Nginx que utilice hosts virtuales para alojar múltiples sitios web en un solo servidor, cada uno apuntando al directorio <code>public_html</code> de distintos usuarios del sistema operativo Debian.</p>
+<h2 id="instalacion-de-nginx">Instalación de Nginx</h2>
+<ol>
+<li>
+<p><strong>Instalamos Nginx en el sistema</strong>:</p>
+<p>En mi caso estoy haciendo uso de una máquina virtual en la que ya tenia instalado el servidor nginx.</p>
+</li>
+<li>
+<p><strong>Usamos SSH para interactuar con el servidor</strong>:
+    <code>sh
+    ssh usuario@servidor_ip</code>
+    <img alt="Conexión SSH" src="img/2.png" /></p>
+</li>
+</ol>
+<h2 id="creacion-de-usuarios-del-sistema">Creación de Usuarios del Sistema</h2>
+<ol>
+<li><strong>Creamos al menos dos usuarios nuevos en el sistema</strong>:
+    <code>sh
+    sudo adduser usuario1
+    sudo adduser usuario2</code>
+    <img alt="Creación de usuarios" src="img/3.png" /></li>
+<li><strong>Asignamos contraseñas seguras a cada usuario</strong> durante el proceso de creación.</li>
+</ol>
+<h2 id="estructura-de-carpetas-y-archivos">Estructura de Carpetas y Archivos</h2>
+<ol>
+<li><strong>Directorios personales</strong>:
+    <code>sh
+    sudo -u usuario1 mkdir /home/usuario1/public_html
+    sudo -u usuario2 mkdir /home/usuario2/public_html</code>
+    <img alt="Directorios personales" src="img/4.png" /></li>
+<li><strong>Permisos</strong>:
+    <code>sh
+    sudo chmod 755 /home/usuario1/public_html
+    sudo chmod 755 /home/usuario2/public_html</code>
+    <img alt="Configuración de permisos" src="img/5.png" /></li>
+<li><strong>Contenido web</strong>:<ul>
+<li>Cada usuario debe crear una página web sencilla dentro de su carpeta <code>public_html</code>. Ejemplo para <code>usuario1</code>:
+  <code>html
+  &lt;!DOCTYPE html&gt;
+  &lt;html lang="es"&gt;
+  &lt;head&gt;
+      &lt;meta charset="UTF-8"&gt;
+      &lt;title&gt;Usuario 1&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+      &lt;h1&gt;Página de Usuario 1&lt;/h1&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;</code>
+<img alt="Contenido web" src="img/6.png" /></li>
+</ul>
+</li>
+</ol>
+<h2 id="creacion-de-hosts-virtuales">Creación de Hosts Virtuales</h2>
+<ol>
+<li>
+<p><strong>Creamos los archivos de configuración para cada web</strong>. Ejemplo para <code>usuario1</code>:
+    <code>sh
+    sudo nano /etc/nginx/sites-available/usuario1</code>
+    Contenido del archivo:</p>
+<p><img alt="Host virtual para usuario1" src="img/7.png" />
+2. <strong>Asignamos los dominios ficticios a cada host virtual</strong>.
+3. <strong>Configuramos cada host virtual</strong> siguiendo el ejemplo anterior.
+4. <strong>Habilitamos los enlaces simbólicos</strong>:
+<code>sh
+sudo ln -s /etc/nginx/sites-available/usuario1 /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/usuario2 /etc/nginx/sites-enabled/</code></p>
+</li>
+</ol>
+<h2 id="configuracion-del-archivo-host">Configuración del Archivo Host</h2>
+<ol>
+<li>
+<p><strong>Configuramos el archivo host en el SO huésped</strong> para poder acceder a las distintas webs:
+    <code>sh
+    sudo nano /etc/hosts</code>
+    Añadimos las siguientes líneas:</p>
+<p><img alt="Configuración del archivo hosts" src="img/9.png" /></p>
+</li>
+</ol>
+<h2 id="implementar-https">Implementar HTTPS</h2>
+<ol>
+<li>
+<p><strong>Generamos un certificado SSL autofirmado</strong> para propósitos de prueba:
+    <code>sh
+    sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx-selfsigned.key -out /etc/nginx/ssl/nginx-selfsigned.crt</code></p>
+</li>
+<li>
+<p><strong>Configuramos Nginx para usar HTTPS</strong>. Ejemplo para <code>usuario1</code>:</p>
+<p><img alt="Configuración de HTTPS" src="img/11.png" />
+3. <strong>Reiniciamos Nginx para aplicar los cambios</strong>:
+<code>sh
+sudo systemctl restart nginx</code></p>
+</li>
+<li>
+<p><strong>Abrimos la url en el navegador</strong></p>
+</li>
+</ol>
+<p>Para Usuario 1:</p>
+<p><img alt="Generar certificado SSL" src="img/8.png" /></p>
+<p>Para Usuario 2:</p>
+<p><img alt="Generar certificado SSL" src="img/10.png" /></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2024-12-19 12:11:11.986532+00:00
+-->
